@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Регистрация</title>
+  <!---->
+  <!---->
+  <!---->
+  <style>
+    .password-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .password-container label {
+      margin-right: 10px; /* Это для создания отступа между меткой и полем ввода */
+    }
+  </style>
+  <!---->
+  <!---->
+  <!---->
+</head>
+<body>
+<h1>Регистрация нового клиента</h1>
+<!--Проверяем есть ли сообщение об ошибке-->
+<div th:if="${errorMessageRegistration}" style="color: red;"}>
+  <p th:text="${errorMessageRegistration}"></p>
+</div>
+<form th:action="@{/registration}" th:object="${client}" method="post">
+  <div>
+    <label for="clientLogin">Логин:</label>
+    <input type="text" id="clientLogin" name="clientLogin" required pattern="^[^\s]+$" minlength="5" maxlength="25" title="Введите логин длиной 5-25 символов без пробелов"/>
+  </div>
+  <!---->
+  <!---->
+  <!---->
+  <div class="password-container">
+    <label for="clientPassword">Пароль:</label>
+    <input type="password" id="clientPassword" name="clientPassword" required pattern="^[^\s]+$" minlength="8" maxlength="18" title="Введите пароль 8-18 символов без пробелов"/>
+    <span class="show-password-icon" onclick="togglePasswordVisibility()">
+            <!-- Иконка для показа пароля -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                <path d="M8 4s-3 0-5 3 5 5 5 5 5-3 5-5-3-3-5-3zm0 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+            </svg>
+
+      <!-- Иконка для скрытия пароля -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16" style="display:none;">
+                <path d="M8.256 1.547A17.56 17.56 0 0 0 8 1.5a17.56 17.56 0 0 0-.256.047 1 1 0 0 0-.627.627A17.56 17.56 0 0 0 7.5 8c0 .166.008.331.023.492l-1.794-1.795a2 2 0 1 0-2.83 2.83L12.47 14.53a2 2 0 0 0 2.83-2.83L8.256 1.547zm.44 2.386a1 1 0 0 0-1.113.32l-.768-.767a3.472 3.472 0 0 1 4.125 1.187 3.47 3.47 0 0 1 1.188 4.124l-.766-.766a1 1 0 0 0-.794-1.907l-.001-.001zm-.833 1.427a2 2 0 0 0-2.833 2.83l-.066.068a3.497 3.497 0 0 1-.267 4.6 3.497 3.497 0 0 1-4.6-.267l-.068-.067a2 2 0 0 0-2.83-2.833l-.066.067a5.512 5.512 0 0 1-.448 7.266 5.51 5.51 0 0 1-7.267-.448l-.066-.067a5.513 5.513 0 0 1 .448-7.266l7.448 7.448a1 1 0 0 0 1.383 0l7.448-7.448a5.513 5.513 0 0 1-.448 7.266l-.066.067a5.512 5.512 0 0 1-7.266.448l-.066-.067a5.497 5.497 0 0 1 .512-7.306 5.497 5.497 0 0 1 7.306-.512l.066.067a5.498 5.498 0 0 1 .512 7.306 5.5 5.5 0 0 1-6.734 3.013 1 1 0 1 0 1.113 1.646 7.498 7.498 0 0 0 9.222-4.103 1 1 0 0 0-.724-1.448z"/>
+            </svg>
+        </span>
+  </div>
+  <!---->
+  <!---->
+  <!---->
+  <div>
+    <label for="lastName">Фамилия:</label>
+    <input type="text" id="lastName" name="lastName" required pattern="^(?!\s)([a-zA-Z]+\s)*[a-zA-Z]+$" minlength="2" maxlength="36" title="Введите фамилию"/>
+  </div>
+  <div>
+    <label for="firstName">Имя:</label>
+    <input type="text" id="firstName" name="firstName" required pattern="^(?!\s)([a-zA-Z]+\s)*[a-zA-Z]+$" minlength="1" maxlength="49" title="Введите имя"/>
+  </div>
+  <div>
+    <label for="patronymic">Отчество (опционально):</label>
+    <input type="text" id="patronymic" name="patronymic" required pattern="^(?!\s)([a-zA-Z]+\s)*[a-zA-Z]+$" minlength="1" maxlength="100" title="Введите отчество (необязательно)"/>
+  </div>
+  <div>
+    <label for="age">Возраст:</label>
+    <input type="number" id="age" name="age" required title="Введите свой возраст"/>
+  </div>
+  <div>
+    <label for="emailAddress">Адрес электронной почты:</label>
+    <input type="email" id="emailAddress" name="emailAddress" required title="введите свой адрес электронной почты"/>
+  </div>
+  <div>
+    <label for="phoneNumber">Номер телефона:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" required pattern="(\+?\d{11}|\d{11})" title="Введите номер телефона по шаблону: +71111111111 (12 символов) или 81111111111 (11 символов)"/>
+  </div>
+  <div>
+    <button type="submit">Зарегистрироваться</button>
+  </div>
+  <!--Кнопка для перехода к странице авторизации-->
+  <div>
+    <a href="/login">Уже зарегистрированы? Войти</a>
+  </div>
+</form>
+<!---->
+<!---->
+<!---->
+<script>
+  function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('clientPassword');
+    const showPasswordIcon = document.querySelector('.show-password-icon');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      showPasswordIcon.querySelector('.bi-eye').style.display = 'none';
+      showPasswordIcon.querySelector('.bi-eye-slash').style.display = 'inline';
+    } else {
+      passwordInput.type = 'password';
+      showPasswordIcon.querySelector('.bi-eye').style.display = 'inline';
+      showPasswordIcon.querySelector('.bi-eye-slash').style.display = 'none';
+    }
+  }
+</script>
+<!---->
+<!---->
+<!---->
+</body>
+</html>

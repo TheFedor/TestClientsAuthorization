@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Приветствие</title>
+</head>
+<body>
+<h1>Привет, <span th:text="${client.clientLogin}"></span></h1>
+<form action="/clients" method="get">
+  <button type="submit">Показать всех клиентов</button>
+</form>
+<form action="/registration" method="get">
+  <button type="submit">Выйти</button>
+</form>
+</body>
+</html>

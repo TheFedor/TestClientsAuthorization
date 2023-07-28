@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Вход</title>
+</head>
+<body>
+<h1>Вход</h1>
+<form th:action="@{/login}" method="post">
+  <div>
+    <label for="clientLogin">Логин:</label>
+    <input type="text" id="clientLogin" name="clientLogin" required pattern="^[^\s]+$" minlength="5" maxlength="25" title="Введите логин длиной 5-25 символов без пробелов"/>
+  </div>
+  <div>
+    <label for="clientPassword">Пароль:</label>
+    <input type="password" id="clientPassword" name="clientPassword" required pattern="^[^\s]+$" minlength="8" maxlength="18" title="Введите пароль 8-18 символов без пробелов"/>
+    <span class="password-toggle" onclick="togglePasswordVisibility()">👁️</span>
+  </div>
+  <div>
+    <button type="submit">Войти</button>
+  </div>
+</form>
+<!--Проверяем есть ли сообщение об ошибке-->
+<div th:if="${errorMessageAuthorization}" style="color: red;"}>
+  <p th:text="${errorMessageAuthorization}"></p>
+</div>
+<script src="/js/scripts.js"></script>
+</body>
+</html>
