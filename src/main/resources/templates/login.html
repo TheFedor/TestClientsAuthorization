@@ -2,26 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Вход</title>
-  <style>
-    .password-container {
-      display: flex;
-      align-items: center;
-    }
-
-    .password-container label {
-      margin-right: 10px; /* Это для создания отступа между меткой и полем ввода */
-    }
-
-    /* Скрываем иконку для скрытия пароля по умолчанию */
-    .hide-icon {
-      display: none;
-    }
-
-    /* Скрываем глаз в поле ввода пароля для браузеров, использующих -ms- */
-    input[type="password"]::-ms-reveal {
-      display: none;
-    }
-  </style>
+  <!-- Подключаем CSS файл -->
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <h1>Вход</h1>
@@ -47,6 +29,10 @@
   </div>
   <div>
     <button type="submit">Войти</button>
+  </div>
+  <!--Кнопка для перехода к странице регистрации-->
+  <div>
+    <a href="/registration">Не регистрировались ранее? Зарегистрируйтесь</a>
   </div>
 </form>
 <!--Проверяем есть ли сообщение об ошибке-->
