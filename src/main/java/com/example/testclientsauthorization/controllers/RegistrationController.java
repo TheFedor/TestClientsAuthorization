@@ -23,6 +23,7 @@ public class RegistrationController {
 
     @GetMapping
     public String showRegistrationForm(Model model) {
+        System.out.println(model.getAttribute("clientTest"));
         model.addAttribute("client", new Client());
         return "registration";
     }
@@ -43,12 +44,18 @@ public class RegistrationController {
             model.addAttribute("errorMessageRegistration", "Пользователь с таким адресом эл. почты уже был зарегистрирован");
             return "registration";
         }
-
         // Добавление нового клиента в базу данных
         clientRepository.save(client);
         //сохраняем данные о клиенте в модель
         //model.addAttribute("client", client);
         return "greeting";
+
+
+        /*
+        model.addAttribute("clientTest", client);
+        return "registration";
+         */
+
     }
 
 }

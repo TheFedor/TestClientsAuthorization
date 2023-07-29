@@ -30,8 +30,7 @@ public class Client {
     private String firstName;
 
     @Column(name = "Patronymic")
-    @Size(min = 1, max = 100)
-    @Null
+    @Size(max = 100)
     private String patronymic;
 
     @Column(name = "Age", nullable = false)
@@ -39,7 +38,7 @@ public class Client {
     private int age;
 
     @Column(name = "EmailAddress", nullable = false)
-    //не ставим ограничение на размер, потому что...
+    //не ставим ограничение на размер, потому что... просто это email
     private String emailAddress;
 
     @Column(name = "PhoneNumber", nullable = false)
@@ -48,12 +47,10 @@ public class Client {
 
     @Column(name = "PassportSeries")
     @Size(min = 4, max = 4)
-    @Null //указывает на то, что поле может быть null
     private String passportSeries;
 
     @Column(name = "PassportNumber")
     @Size(min = 6, max = 6)
-    @Null
     private String passportNumber;
 
 }
