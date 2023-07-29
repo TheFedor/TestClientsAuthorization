@@ -31,6 +31,21 @@
       <img src="/images/icons/sun_icon.png" width="20" height="20" alt="Скрыть пароль" class="hide-icon"/>
     </span>
   </div>
+  <!-- Поля для повторного ввода пароля -->
+  <div class="password-container">
+    <label for="confirmPassword">Подтвердите пароль:</label>
+    <!-- Без пробелов вообще. Не кириллицей. От 8 до 18 символов -->
+    <input type="password" id="confirmPassword" name="confirmPassword" required pattern="^[^\sа-яА-ЯёЁ]+$" minlength="8" maxlength="18"
+           placeholder="Повторите пароль" title="Без пробелов, длиной от 8 до 18 символов. НЕ кириллицей"/>
+    <span class="show-confirm-password-icon" onclick="togglePasswordVisibility()">
+      <!- Иконка для скрытия пароля ->
+      <img src="/images/icons/moon_icon.png" width="20" height="20" alt="Показать пароль" class="show-icon"/>
+
+      <!- Иконка для показа пароля ->
+      <img src="/images/icons/sun_icon.png" width="20" height="20" alt="Скрыть пароль" class="hide-icon"/>
+    </span>
+    <div class="password-match-error" style="color: red; display: none;">Пароли не совпадают.</div>
+  </div>
   <div>
     <label for="lastName">Фамилия:</label>
     <!-- Без пробелов в начале и в конце. Длиной от 2 до 36 символов -->
@@ -90,5 +105,6 @@
   </div>
 </form>
 <script src="/js/ChangingPasswordVisibility.js"></script>
+<script src="/js/RegistrationValidation.js"></script>
 </body>
 </html>
