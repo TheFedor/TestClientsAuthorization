@@ -32,14 +32,16 @@ public class AuthorizationController {
             return "login";
         }
 
-        if (client.getClientLogin().equals("admin") && client.getClientPassword().equals("admin"))
+        model.addAttribute("client", client);
+
+        //проверяем не является ли входящий администратором
+        if (client.getClientLogin().equals("admin") && client.getClientPassword().equals("adminPas"))
         {
             //на всякий случай все-равно сохраним данные в модель, вдруг понадобится
             model.addAttribute("client", client);
-            return "admin";
+            return "redirect:/admin";
         }
 
-        model.addAttribute("client", client);
         return "greeting";
     }
 

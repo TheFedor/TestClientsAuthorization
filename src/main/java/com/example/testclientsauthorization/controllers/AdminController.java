@@ -26,7 +26,7 @@ public class AdminController {
     public String showAdminPage(Model model) {
         List<Client> clients = clientRepository.findAll();
         model.addAttribute("clients", clients);
-        return "clients";
+        return "admin";
     }
 
 }
