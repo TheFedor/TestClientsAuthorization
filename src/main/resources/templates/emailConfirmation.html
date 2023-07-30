@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>emailConfirmation</title>
+</head>
+<body>
+<h1>Введите шестизначный код, отправленный вом на почту</h1>
+
+<!-- Поместим значение sixDigitCode из модели в атрибут "data-six-digit-code" элемента <div> -->
+<div id="sixDigitCodeContainer" th:data-six-digit-code="${sixDigitCode}" style="display: none;"></div>
+
+<form th:action="@{/emailConfirmation}" method="post">
+  <div>
+    <label for="emailAddressConfirm">Введите шестизначный код, отправленный вам на email:</label>
+    <input type="text" id="emailAddressConfirm" name="emailAddressConfirm" required pattern="\d{6}" minLength="6" maxLength="6"
+           placegolder="Введите шестизначный код (без пробелов)" title="введите шестизначный код (без пробелов), отправленный вам на указанный вами email"/>
+    <div class="six-digit-code-match-error" style="color: red; display: none;">Неверный код</div>
+  </div>
+  <div>
+    <button type="submit">Окончить регистрацию</button>
+  </div>
+  <div>
+    <a href="/registration">Ввели неверный пароль? Вернитесь к регистрации</a>
+  </div>
+</form>
+
+<!-- подключаем JavaScript скрипт -->
+<script src="/js/emailConfirmationValidation.js"></script>
+</body>
+</html>

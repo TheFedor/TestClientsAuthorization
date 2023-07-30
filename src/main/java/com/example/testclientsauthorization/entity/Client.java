@@ -1,7 +1,6 @@
 package com.example.testclientsauthorization.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,4 +52,22 @@ public class Client {
     @Size(min = 6, max = 6)
     private String passportNumber;
 
+    //переопределяем toString(), что нужно только для тестов
+
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "clientLogin='" + clientLogin + '\'' +
+                ", clientPassword='" + clientPassword + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", age=" + age +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", passportSeries='" + passportSeries + '\'' +
+                ", passportNumber='" + passportNumber + '\'' +
+                '}';
+    }
 }

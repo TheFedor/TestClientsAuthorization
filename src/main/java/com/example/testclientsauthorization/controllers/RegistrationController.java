@@ -2,6 +2,7 @@ package com.example.testclientsauthorization.controllers;
 
 import com.example.testclientsauthorization.entity.Client;
 import com.example.testclientsauthorization.repository.ClientRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    private final ClientRepository clientRepository;
+    private  final ClientRepository clientRepository;
 
     @Autowired
     public RegistrationController(ClientRepository clientRepository)
@@ -23,13 +24,12 @@ public class RegistrationController {
 
     @GetMapping
     public String showRegistrationForm(Model model) {
-        System.out.println(model.getAttribute("clientTest"));
         model.addAttribute("client", new Client());
         return "registration";
     }
 
     @PostMapping
-    public String processRegistrationForm(Client client, Model model) {
+    public String processRegistrationForm(Client client, Model model, HttpSession session) {
 
         //Проверяем, существует ли пользователь с таким же логином
         Client existingClientWithLogin = clientRepository.findById(client.getClientLogin()).orElse(null);
@@ -44,17 +44,12 @@ public class RegistrationController {
             model.addAttribute("errorMessageRegistration", "Пользователь с таким адресом эл. почты уже был зарегистрирован");
             return "registration";
         }
-        // Добавление нового клиента в базу данных
-        clientRepository.save(client);
-        //сохраняем данные о клиенте в модель
-        //model.addAttribute("client", client);
-        return "greeting";
 
+        //сохраняем нашего клиента в сессии, чтобы не потерялся
+        session.setAttribute("client", client);
 
-        /*
-        model.addAttribute("clientTest", client);
-        return "registration";
-         */
+        //переходим на новый адрес, не забывая передать сообщения модели
+        return "redirect:/emailConfirmation";
 
     }
 
